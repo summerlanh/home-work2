@@ -1,0 +1,46 @@
+﻿@model BirthdayCard.Models.CardForm
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>Thanks</title>
+</head>
+<body>
+    <div class="panel panel-success">
+
+        <div class="panel-heading">
+            <p>Birthday Card Generator</p>
+        </div>
+
+        <div class="panel-body">
+            <h2>Birthday Card Sent</h2>
+
+            @using (Html.BeginForm())
+            {
+                <div>
+                    <label>From: @Model.FromEmail</label>
+                </div>
+                <div>
+                    <label>To: @Model.ToEmail</label>
+                </div>
+                <div>
+                    <label>Message: @Model.Message</label>
+                </div>
+            }
+        </div>
+
+        <div class="panel-footer">
+            <p>&copy;2016 - My ASP.NET Application</p>
+        </div>
+
+    </div>
+    <footer>&copy;2016 - My ASP.NET Application</footer>
+</body>
+</html>
