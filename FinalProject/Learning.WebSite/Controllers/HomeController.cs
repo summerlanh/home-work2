@@ -109,18 +109,25 @@ namespace Learning.WebSite.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult EnrollInClass()
+        public ViewResult EnrollInClass()
         {
-            return View();
+            var userAddClass = new Models.UserAddClass();
+            userAddClass.Classes = new[]{
+            new SelectListItem{ Text="C#", Value="1"},
+            new SelectListItem{ Text="ASP.NET MVC", Value="2"},
+            new SelectListItem{ Text="Android", Value="3"},
+            new SelectListItem{ Text="Design Patterns", Value="4"}
+            };
+            return View(userAddClass);
         }
 
         [HttpPost]
         public ActionResult EnrollInClass(Models.UserAddClass userAddClass)
-        {
+        {            
             var user = (Learning.WebSite.Models.UserModel)Session["User"];
-            userAddClass.UserId = user.Id;
+            userAddClass.UserId = user.Id;            
             var item = userClassManager.Add(userAddClass.UserId, userAddClass.SelectedClassId);
-            return View("AddClass");
+            return View("AddClass", userAddClass);
         }
 
         [Authorize]

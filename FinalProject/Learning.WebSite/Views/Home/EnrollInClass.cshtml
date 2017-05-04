@@ -4,15 +4,11 @@
     ViewBag.Title = "EnrollInClass";
 }
 
+
 <h2>Enroll In Class</h2>
 @using (Html.BeginForm())
 {
-    @Html.DropDownListFor(t => t.SelectedClassId, new[]{
-  new SelectListItem{ Text="C#", Value="1"},
-  new SelectListItem{ Text="ASP.NET MVC", Value="2"},
-  new SelectListItem{ Text="Android", Value="3"},
-  new SelectListItem{ Text="Design Patterns", Value="4"}
-})
+    @Html.DropDownListFor(t => t.SelectedClassId, Model.Classes ) 
 
     <input type="submit" value="Add Class" />
 }

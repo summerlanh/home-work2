@@ -10,6 +10,7 @@ namespace Learning.WebSite.Models
     public class UserAddClass
     {
         public int UserId { get; set; }
-        public int SelectedClassId { get; set; }       
+        public int SelectedClassId { get; set; }
+        public IEnumerable<SelectListItem> Classes { get; set; }
     }
 }
