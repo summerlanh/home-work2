@@ -50,7 +50,6 @@ namespace Learning.WebSite.Controllers
             if (ModelState.IsValid)
             {
                 var user = userManager.LogIn(loginModel.UserName, loginModel.Password);
-
                 if (user == null)
                 {
                     ModelState.AddModelError("", "User name and password do not match.");
@@ -58,9 +57,7 @@ namespace Learning.WebSite.Controllers
                 else
                 {
                     Session["User"] = new Learning.WebSite.Models.UserModel { Id = user.Id, Name = user.Name };
-
                     System.Web.Security.FormsAuthentication.SetAuthCookie(loginModel.UserName, false);
-
                     return Redirect(returnUrl ?? "~/");
                 }
             }
@@ -87,11 +84,8 @@ namespace Learning.WebSite.Controllers
             if (ModelState.IsValid)
             {
                 var user = userManager.Register(registerModel.UserName, registerModel.Password);
-
                 Session["User"] = new Models.UserModel { Id = user.Id, Name = user.Name };
-
                 System.Web.Security.FormsAuthentication.SetAuthCookie(registerModel.UserName, false);
-
                 return Redirect(returnUrl ?? "~/");
             }
 
@@ -112,12 +106,8 @@ namespace Learning.WebSite.Controllers
         public ViewResult EnrollInClass()
         {
             var userAddClass = new Models.UserAddClass();
-            userAddClass.Classes = new[]{
-            new SelectListItem{ Text="C#", Value="1"},
-            new SelectListItem{ Text="ASP.NET MVC", Value="2"},
-            new SelectListItem{ Text="Android", Value="3"},
-            new SelectListItem{ Text="Design Patterns", Value="4"}
-            };
+            userAddClass.Classes = classManager.Classes
+                .Select(t => new SelectListItem { Value = t.ClassId.ToString(), Text = t.ClassName }).ToList();            
             return View(userAddClass);
         }
 
@@ -134,10 +124,10 @@ namespace Learning.WebSite.Controllers
         public ActionResult EnrolledClasses()
         {
             var user = (Learning.WebSite.Models.UserModel)Session["User"];
-
             var classes = userClassManager.GetAll(user.Id)
                                         .Select(t => new Learning.WebSite.Models.UserClassModel
-                                        { ClassId = t.ClassId, ClassName = t.ClassName, ClassDescription = t.ClassDescription, ClassPrice = t.ClassPrice });
+                                        { ClassId = t.ClassId, ClassName = t.ClassName,
+                                          ClassDescription = t.ClassDescription, ClassPrice = t.ClassPrice });
             return View(classes);
         }
 
