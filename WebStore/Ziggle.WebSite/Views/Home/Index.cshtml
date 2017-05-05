@@ -1,0 +1,18 @@
+﻿@model Ziggle.WebSite.Models.IndexModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Ziggle</h1>
+    <p class="lead">The only way to shop on the Interwebs.</p>
+</div>
+<div class="row">
+    @foreach (var category in Model.Categories)
+    {
+        <div class="col-md-4">
+            <h2>@Html.ActionLink(category.Name, "Category", new { id = category.Id })</h2>
+        </div>
+    }
+</div>

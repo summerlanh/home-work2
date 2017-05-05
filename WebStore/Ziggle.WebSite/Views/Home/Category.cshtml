@@ -1,0 +1,14 @@
+﻿@model Ziggle.WebSite.Models.CategoryViewModel
+
+@{
+    ViewBag.Title = Model.Category.Name;
+}
+
+<h2>@Model.Category.Name</h2>
+
+<div class="row">
+    @foreach (var product in Model.Products)
+    {
+        <p>@product.Name - @string.Format("{0:C}", product.Price) @Html.ActionLink("Add to cart", "AddToCart", new { id = product.Id })</p> 
+    }
+</div>
