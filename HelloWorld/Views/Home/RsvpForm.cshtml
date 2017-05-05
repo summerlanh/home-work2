@@ -1,19 +1,45 @@
 ﻿@model HelloWorld.Models.GuestResponse
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Content/styles.css" />
+    <title>RsvpForm</title>
+</head>
 
 @{
     Layout = null;
 }
 
-@using (Html.BeginForm())
-{
-    <p>Name: @Html.TextBoxFor(t => t.Name)</p>
-    <p>Phone: @Html.TextBoxFor(t => t.Phone)</p>
-    <p>
-        Will Attend: @Html.DropDownListFor(t => t.WillAttend, new[]
+<body>
+    <div class="panel panel-success">
+        <div class="panel-heading text-center"><h4>RSVP</h4></div>
+        <div class="panel-body">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+
+                <div class="form-group">
+                <label>Name:</label> @Html.TextBoxFor(t => t.Name, new { @class = "form-control", maxlength = 30, style = "width:200px;" })
+                    </div>
+                    <div class="form-group">
+                        <label>Phone: </label>@Html.TextBoxFor(t => t.Phone, new { @class = "form-control", maxlength = 30, style = "width:200px;" })
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label> @Html.TextBoxFor(t => t.Email, new { @class = "form-control", maxlength = 30, style = "width:200px;" })
+                    </div>
+                        <div class="form-group">                           
+                                <label>
+                                    Will Attend:
+                                </label> @Html.DropDownListFor(t => t.WillAttend, new[]
       {
         new SelectListItem {Text="Yes, I'll be there", Value=bool.TrueString},
         new SelectListItem{Text="No, I can't come", Value=bool.FalseString},
-      }, "Choose an option")
-    </p>
-    <input type="submit" value="Submit RSVP" />
-}
+      }, "Choose an option", new { @class = "form-control", maxlength = 30, style = "width:200px;" })
+                           </div>
+                            <div class="text-center">
+                                <input class="btn btn-success" type="submit" value="Submit RSVP" />
+                            </div>
+                            }
+                        </div>
+    </div>
+</body>

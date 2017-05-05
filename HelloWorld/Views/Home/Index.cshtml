@@ -1,20 +1,29 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<style>
+    .btn a {
+        color: white;
+        text-decoration: none;
+    }
 
-<!DOCTYPE html>
+    body {
+        background-color: #f1f1f1;
+    }
+</style>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
-        <p>The party is tonight.</p>
-        <a href="/home/rsvpform">RSVP Now</a>
+<div class="text-center">
+    <h2>The party is tonight.</h2>
+    @Html.Action("IncrementCount")
+    @Html.ActionLink("Login", "Login")
+    @Html.ActionLink("Logoff", "Logoff")
+    @if (Session["UserName"] != null)
+    {     @Html.Action("DisplayLoginName")
+    }
+    <h3>And you're invited</h3>
+
+    <div class="btn btn-success">
         @Html.ActionLink("RSVP Now", "RsvpForm")
     </div>
-</body>
-</html>
+</div>

@@ -6,8 +6,20 @@
 
 <!DOCTYPE html>
 
-<h1>Thank you, @Model.Name</h1>
-@if (Model.WillAttend == true)
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>Thanks</title>
+    <style> 
+    body {background-color: #F1F1F1; }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h1>Thank you, @Model.Name at @Model.Email</h1>
+        <div class="lead">
+            @if (Model.WillAttend == true)
 {
     @:Thanks for coming!
 }
@@ -15,4 +27,7 @@ else
 {
     @:Sorry you can't make it.
 }
-
+            </div>
+        </div>
+    </body>
+</html>

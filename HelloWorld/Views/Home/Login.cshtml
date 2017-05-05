@@ -1,0 +1,26 @@
+﻿@model HelloWorld.Models.LoginModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Content/styles.css" />
+    <title>Login</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <p>
+            <label>User Name:</label> @Html.TextBoxFor(t => t.UserName,
+                             new { @class = "form-control", maxlength = 30, style = "width:200px;" })
+        </p>
+                            <input class="btn btn-success" type="submit" value="Login" />
+    }
+</body>
+</html>
